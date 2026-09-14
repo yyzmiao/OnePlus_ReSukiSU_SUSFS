@@ -1,153 +1,106 @@
 <div align="center">
 
-# 🔥 Huangdihd's Fork of Wild Kernels for OnePlus (Oppo/Realme)
+# OnePlus 13 ReSukiSU + SUSFS Kernel
 
-[![KernelSU](https://img.shields.io/badge/KernelSU-Supported-green)](https://kernelsu.org/)
-[![ReSukiSU](https://img.shields.io/badge/ReSukiSU-Supported-green)](https://resukisu.github.io/)
-[![SUSFS](https://img.shields.io/badge/SUSFS-Integrated-orange)](https://gitlab.com/simonpunk/susfs4ksu)
-[![OnePlusOSS Tracking Status](https://img.shields.io/badge/OnePlusOSS--Tracker-active-green)](https://github.com/WildKernels/OnePlus_KernelSU_SUSFS/blob/status-page/README.md)
+**My personal kernel build repository for the OnePlus 13**
 
-</div>
+[![Build](https://github.com/yyzmiao/OnePlus_ReSukiSU_SUSFS/actions/workflows/build-kernel-release.yml/badge.svg)](https://github.com/yyzmiao/OnePlus_ReSukiSU_SUSFS/actions/workflows/build-kernel-release.yml)
+[![ReSukiSU](https://img.shields.io/badge/ReSukiSU-supported-2ea44f)](https://github.com/ReSukiSU/ReSukiSU)
+[![SUSFS](https://img.shields.io/badge/SUSFS-integrated-orange)](https://gitlab.com/simonpunk/susfs4ksu)
 
----
-
-## ⚠️ Disclaimer
-
-Flashing this kernel will not void your warranty, but there is always a risk of bricking your device. Please make sure to:
-- 💾 Back up your data
-- 🧠 Understand the risks before proceeding
-
-- I am **not responsible** for bricked devices, damaged hardware, or any issues that arise from using this kernel.
-
-- **Please** do thorough research and fully understand the features added in this kernel before flashing it!
-
-- By flashing this kernel, **YOU** are choosing to make these modifications. If something goes wrong, **do not blame me**!
-
-<div align="center">
-  
-# **🚨 Proceed at your own risk!**
+English · [简体中文](README_CN.md)
 
 </div>
 
----
+## About this repository
 
-## 🔧 Available Kernels
+This is my own streamlined build repository for the **OnePlus 13**. It is not a general-purpose multi-device kernel project: the extra device configurations and manifests from upstream have intentionally been removed so that the repository has one clear target and one reproducible build profile.
 
-<div align="center">
+The build keeps the parts I use—ReSukiSU, SUSFS, networking features, and selected optimizations—while disabling optional components that are unnecessary for my device or usage. The repository remains public for transparency and reproducibility, but every build should be treated as a personal/custom kernel rather than an official OnePlus, ReSukiSU, or WildKernels release.
 
-| Kernel | Repository | Status |
-|--------|------------|--------|
-| 🏗️ **GKI** | [GKI_KernelSU_SUSFS](https://github.com/WildKernels/GKI_KernelSU_SUSFS) | ✅ Active |
-| 👑 **Sultan** | [Sultan_KernelSU_SUSFS](https://github.com/WildKernels/Sultan_KernelSU_SUSFS) | ✅ Active |
-| 📱 **OnePlus/Oppo/Realme** | [OnePlus_KernelSU_SUSFS](https://github.com/WildKernels/OnePlus_KernelSU_SUSFS) | ✅ Active |
-| 📱 **Samsung** | [Samsung_KernelSU_SUSFS](https://github.com/WildKernels/Samsung_KernelSU_SUSFS) | ✅ Active |
-</div>
+## Supported target
 
----
+| Item | Value |
+| --- | --- |
+| Device | OnePlus 13 |
+| SoC | Snapdragon 8 Elite (`sun` / SM8750) |
+| Firmware target | OxygenOS 16 |
+| Source platform | Android 15 |
+| Kernel branch | Linux 6.6 |
+| Manifest | `oneplus_13_w.xml` |
+| Default root solution | ReSukiSU |
+| Filesystem integration | SUSFS |
 
-## 🔗 Additional Resources
+Only `configs/oos16/OP13.json` is maintained. Other OnePlus, Oppo, Realme, Nord, Ace, Pad, and Open devices are outside the scope of this fork.
 
-- 🩹 [Kernel Patches](https://github.com/WildKernels/kernel_patches)
-- ⚡ [Kernel Flasher](https://github.com/fatalcoder524/KernelFlasher)
+## My build profile
 
----
+Enabled in the current OnePlus 13 configuration:
 
-## 📱 Device Compatibility
+- ReSukiSU and SUSFS integration
+- ThinLTO and the repository's optimization patch set
+- BBR v1 and BBR v3 networking support
+- TTL target support
+- IP set and IPv6 NAT support
+- Unicode bypass fix
+- A device-specific module blacklist
 
-- Please verify the device compatibility before flashing here: [Compatibility_Info](https://github.com/WildKernels/OnePlus_KernelSU_SUSFS/blob/main/compatibility.md). 
+Intentionally disabled in this profile:
 
----
+- HMBIRD/SCX
+- Baseband Guard (BBG)
+- Droidspaces
+- NTSync
 
-## 📱 OnePlusOSS Repositories Tracking
+These choices are deliberate: this fork favors the features I actually use and avoids optional components that add unwanted behavior, overhead, heat, or maintenance for my OnePlus 13 setup.
 
-- 📊 **Live Dashboard**: [OnePlus Repos Tracking & Changes](https://github.com/WildKernels/OnePlus_KernelSU_SUSFS/blob/status-page/README.md)
-- ⏱️ **Update Frequency**: Every 2 hours (Automated)
----
+## Building with GitHub Actions
 
-## ✨ Features
+1. Fork this repository or use it from your own GitHub account.
+2. Open **Actions → Build and Release OnePlus 13 Kernel**.
+3. Select **Run workflow**.
+4. Keep `ReSukiSU` as the KSU type unless you specifically need standard KernelSU.
+5. Enable the release option if you want the completed package published under GitHub Releases.
+6. Download the generated AnyKernel3 ZIP from the workflow artifacts or release page.
 
-- 🔐 **ReSukiSU**: Kernel-based Android Root Solution,forked from sukisu
-- 🥷 **SUSFS**: An addon root hiding kernel patches and userspace module for KernelSU
-- 🛡️ **BBG**: LSM-based Baseband Guard security to protect critical device partitions. abl/efisp can be added to whitelist for efisp exploit devices.
-- 🛠️ **HMBIRD SCX**: Scheduler extensions for SM8750/MT6991 devices
-- 🖧 **BBRv1**: Improved TCP congestion control
-- 🖧 **BBRv3**: Improved TCP congestion control
-- 🚦 **CAKE and PIE qdisc Support**: Better Net Schedulers
-- ✅ **LTO**: Link Time Optimisation enabled
-- 🚀 **Optimisation patches**: Memory, I/O, CPU scheduler, network and other general tunings
-- 🌐 **TTL Target Support**: Network packet manipulation
-- 🧱 **IP Set & IPv6 NAT Support**: Advanced firewall capabilities and IPv6 NAT Support
-- ⚡️ **TMPFS XATTR / POSIX ACL**: Extended TMPFS support for meta modules and Mountify
-- </> **Unicode Bypass Fix**: Prevent path traversal and other detections using non-printable Unicode codepoints [Experimental]
-- 🖥️ **Droidspaces Support**: Support Portable Linux containers to run full Linux environments.
-- 🔃 **NTSync**: Provide high-performance, low-latency synchronization primitives compatible with the Windows NT kernel API
+The workflow is intentionally restricted to the OnePlus 13 configuration. A clean build is slower but useful after toolchain, patch, or source changes; normal builds can reuse ccache.
 
----
+## Installation and safety
 
-## 📋 Installation Instructions
+Before flashing:
 
-- **KernelSU**: Developed by [tiann](https://github.com/tiann/KernelSU).
-- **ReSukiSU**: Developed by [ReSukiSU Team](https://github.com/ReSukiSU/ReSukiSU)
-- **Magic-KSU**: Developed by [5ec1cff](https://github.com/5ec1cff/KernelSU).  
-- **SUSFS**: Developed by [simonpunk](https://gitlab.com/simonpunk/susfs4ksu.git).
-- **SUSFS Module**: Developed by [sidex15](https://github.com/sidex15).
-- **Sultan Kernels**: Developed by [kerneltoast](https://github.com/kerneltoast).
-For GKI installation, please follow the official guide:
+- Confirm that the package was built for **OnePlus 13, OxygenOS 16, Android 15 / kernel 6.6 source**.
+- Back up your boot-critical partitions and important data.
+- Keep a known-good boot image and a working recovery method available.
+- Do not assume compatibility after a major OTA or kernel source change.
+- Read the build log and release notes before using the package.
 
-📖 **[KernelSU Installation Guide](https://kernelsu.org/guide/installation.html)**
+Flashing a custom kernel can cause boot loops, data loss, broken hardware features, or an unbootable device. You are responsible for understanding and accepting those risks.
 
-You can also find Installation instructions in the release notes.
+## Repository layout
 
----
+```text
+configs/oos16/OP13.json                 OnePlus 13 build profile
+manifests/oos16/oneplus_13_w.xml        OnePlus 13 source manifest
+.github/actions/build-kernel/           Reusable kernel build action
+.github/workflows/build-kernel-release.yml
+                                        Manual build and release workflow
+```
 
-## 🌟 Special Thanks
+## Credits
 
-**These amazing people help make this project possible! ❤️**
+This personal fork builds on work from the Android kernel community, especially:
 
-<div align="center">
+- [huangdihd/OnePlus_ReSukiSU_SUSFS](https://github.com/huangdihd/OnePlus_ReSukiSU_SUSFS)
+- [WildKernels/OnePlus_KernelSU_SUSFS](https://github.com/WildKernels/OnePlus_KernelSU_SUSFS)
+- [ReSukiSU](https://github.com/ReSukiSU/ReSukiSU)
+- [KernelSU](https://github.com/tiann/KernelSU)
+- [SUSFS by simonpunk](https://gitlab.com/simonpunk/susfs4ksu)
+- [SUSFS userspace module by sidex15](https://github.com/sidex15)
+- [AnyKernel3](https://github.com/osm0sis/AnyKernel3)
 
+All credit for upstream projects and patches belongs to their respective maintainers. My changes focus on the OnePlus 13 build profile, repository cleanup, and the fixes needed by this personal build.
 
-| 🔧 **Project** | 👨‍💻 **Developer** | 🔗 **Link** |
-|:---------------:|:----------------:|:-----------:|
-| **KernelSU** | tiann | [![GitHub](https://img.shields.io/badge/GitHub-tiann-blue?style=flat-square&logo=github)](https://github.com/tiann/KernelSU) |
-| **ReSukiSU** | resukisu | [![GitHub](https://img.shields.io/badge/GitHub-resukisu-blue?style=flat-square&logo=github)](https://github.com/ReSukiSU/ReSukiSU) |
-| **Magic-KSU** | 5ec1cff | [![GitHub](https://img.shields.io/badge/GitHub-5ec1cff-blue?style=flat-square&logo=github)](https://github.com/5ec1cff/KernelSU) |
-| **SUSFS** | simonpunk | [![GitLab](https://img.shields.io/badge/GitLab-simonpunk-orange?style=flat-square&logo=gitlab)](https://gitlab.com/simonpunk/susfs4ksu.git) |
-| **SUSFS Module** | sidex15 | [![GitHub](https://img.shields.io/badge/GitHub-sidex15-blue?style=flat-square&logo=github)](https://github.com/sidex15) |
-| **Sultan Kernels** | kerneltoast | [![GitHub](https://img.shields.io/badge/GitHub-kerneltoast-blue?style=flat-square&logo=github)](https://github.com/kerneltoast) |
-| **Baseband Guard** | vc-teahouse | [![GitHub](https://img.shields.io/badge/GitHub-vc--teahouse-blue?style=flat-square&logo=github)](https://github.com/vc-teahouse/Baseband-guard.git) |
-| **Droidspaces** | ravindu644 | [![GitHub](https://img.shields.io/badge/GitHub-ravindu644-blue?style=flat-square&logo=github)](https://github.com/ravindu644/Droidspaces-OSS.git) |
+## Disclaimer
 
-</div>
-
-*If you have contributed and are not listed here, please remind me!* 🙏
-
----
-
-## 💬 Support
-
-If you encounter any issues or need help, feel free to:
-- 🐛 Open an issue in this repository
-- 💬 Reach out to me directly
-
----
-
-## 📱 Connect With Us
-
-<div align="center">
-  
-[![Telegram](https://img.shields.io/badge/Telegram-huangdihd-blue?logo=telegram)](https://t.me/huangdihd)
-[![Telegram Group](https://img.shields.io/badge/Telegram-huangdihd_wildkernel-blue?logo=telegram)](https://t.me/huangdihd_wildkernel)
-
-</div>
-
----
-
-## 💝 Donations
-
-Any and all donations are appreciated!
-
-PayPal: [paypal.me/fatalcoder524](https://paypal.me/fatalcoder524)
-
-DM on Telegram for UPI donations!
-
+This project is provided **as is**, without warranty or a guarantee of support. It is not affiliated with or endorsed by OnePlus. If you choose to build or flash it, you accept full responsibility for the result.

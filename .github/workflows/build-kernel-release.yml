@@ -1,4 +1,4 @@
-name: Build and Release OnePlus Kernels
+name: Build and Release OnePlus 13 Kernel
 
 permissions:
   contents: write
@@ -13,24 +13,14 @@ on:
         type: boolean
         default: false
       op_model:
-        description: 'Select the OnePlus kernels to build'
+        description: 'Build target (this fork only supports OnePlus 13)'
         required: true
         type: choice
         options:
-          - OOS14+15+16
-          - OOS15+16
-          - OOS14+15
-          - OOS16
-          - OOS15
-          - OOS14
-          - android16-6.12
-          - android15-6.6
-          - android14-6.1
-          - android13-5.15
-          - android12-5.10
-        default: OOS14+15+16
+          - OP13
+        default: OP13
       config_path:
-        description: 'Optional exact config path for a single-device validation build (for example configs/oos16/OP-ACE-2.json)'
+        description: 'Optional validation override (configs/oos16/OP13.json)'
         required: false
         type: string
         default: ''
@@ -153,6 +143,9 @@ jobs:
           jq_filter="."
           
           case "$input" in
+            OP13)
+              jq_filter='map(select(.model == "OP13" and .os_version == "OOS16"))'
+              ;;
             OOS14+15+16)
               ;;
             OOS15+16)
@@ -865,7 +858,7 @@ jobs:
       REPO_NAME: ${{ github.event.repository.name }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SUSFS_BASE_VERSION: ${{ needs.set-op-model.outputs.susfs_base_version }}
-      RELEASE_NAME: 'OnePlus Kernels With ${{ inputs.ksu_type }} & SUSFS ${{ needs.set-op-model.outputs.susfs_base_version }}'
+      RELEASE_NAME: 'OnePlus 13 Kernel with ${{ inputs.ksu_type }} & SUSFS ${{ needs.set-op-model.outputs.susfs_base_version }}'
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v6
