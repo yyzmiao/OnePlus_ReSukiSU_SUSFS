@@ -4,7 +4,7 @@
 
 **My personal kernel build repository for the OnePlus 13**
 
-[![Build](https://github.com/yyzmiao/OnePlus_ReSukiSU_SUSFS/actions/workflows/build-kernel-release.yml/badge.svg)](https://github.com/yyzmiao/OnePlus_ReSukiSU_SUSFS/actions/workflows/build-kernel-release.yml)
+[![Build](https://github.com/yyzmiao/YYZM-OP13-ReSukiSU/actions/workflows/build-kernel-release.yml/badge.svg)](https://github.com/yyzmiao/YYZM-OP13-ReSukiSU/actions/workflows/build-kernel-release.yml)
 [![ReSukiSU](https://img.shields.io/badge/ReSukiSU-supported-2ea44f)](https://github.com/ReSukiSU/ReSukiSU)
 [![SUSFS](https://img.shields.io/badge/SUSFS-integrated-orange)](https://gitlab.com/simonpunk/susfs4ksu)
 

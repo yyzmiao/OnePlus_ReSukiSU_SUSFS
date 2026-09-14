@@ -4,7 +4,7 @@
 
 **我自己使用的一加 13 内核构建仓库**
 
-[![构建状态](https://github.com/yyzmiao/OnePlus_ReSukiSU_SUSFS/actions/workflows/build-kernel-release.yml/badge.svg)](https://github.com/yyzmiao/OnePlus_ReSukiSU_SUSFS/actions/workflows/build-kernel-release.yml)
+[![构建状态](https://github.com/yyzmiao/YYZM-OP13-ReSukiSU/actions/workflows/build-kernel-release.yml/badge.svg)](https://github.com/yyzmiao/YYZM-OP13-ReSukiSU/actions/workflows/build-kernel-release.yml)
 [![ReSukiSU](https://img.shields.io/badge/ReSukiSU-支持-2ea44f)](https://github.com/ReSukiSU/ReSukiSU)
 [![SUSFS](https://img.shields.io/badge/SUSFS-已集成-orange)](https://gitlab.com/simonpunk/susfs4ksu)
 
